@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Open Speech Recording</title>
+    <link href="static/styles/app.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="image">
+        <img src="static/styles/umec.jpg" height="80">
+    </div>
+
+    <header>
+        <h1>Speech Recorder</h1>
+    </header>
+
+    <div>
+        <input type="file" id="fileInput">
+    </div>
+
+    <section class="top-display">
+        <div class="directions">
+            Press Record to start.
+            <br/>
+            Must finish all recordings before upload.
+        </div>
+        <div class="progress-display">
+        </div>
+        <div class="info-display">
+        </div>
+    </section>
+
+    <section class="main-controls">
+        <canvas class="visualizer"></canvas>
+        <div id="buttons">
+            <button class="record">Record</button>
+            <button class="stop">Stop</button>
+            <button class="upload">Upload</button>
+        </div>
+    </section>
+
+    <section class="sound-clips">
+    </section>
+
+</div>
+
+<footer>
+    <a>UMEC</a>
+</footer>
+
+<script src="static/scripts/app.js"></script>
+
+</body>
+</html>
