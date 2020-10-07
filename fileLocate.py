@@ -18,6 +18,9 @@ def addZeros(trial):
     return trial
 
 
+umec_dict = {
+
+}
 numb_dict = {
     "One": "1",
     "一": "1",
@@ -39,9 +42,11 @@ numb_dict = {
     "九": "9",
     "Ten": "10",
     "十": "10",
+    "Hi UMEC": "UMEC",
+    "你好 UMEC": "UMEC",
 }
-english_chars = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
-chinese_chars = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
+english_chars = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Hi UMEC"]
+chinese_chars = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "你好 UMEC"]
 lang_dict = {}
 for i in chinese_chars:
     lang_dict[i] = "Mandarin"

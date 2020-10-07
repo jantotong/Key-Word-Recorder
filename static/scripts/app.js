@@ -52,9 +52,9 @@ if (navigator.getUserMedia) {
                         progress.style.fontSize = "xx-large";
                         progress.innerText = "";
                         startRecording();
-                    }, 1);
-                }, 1);
-            }, 1);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
             stop.disabled = false;
             record.disabled = true;
         }
@@ -180,54 +180,27 @@ function visualize(stream) {
     }
 }
 
-function splitter(str) {
-    var arr = str.split(" ");
-    return arr;
-}
-
-var wantedWords = [];
-// document.getElementById('fileInput').addEventListener('change', function selectedFileChanged() {
-//     if (this.files.length === 0) {
-//         console.log('No file selected.');
-//         return;
-//     }
-//
-//     const reader = new FileReader();
-//     reader.onload = function fileReadCompleted() {
-//         // when the reader is done, the content is in reader.result.
-//         console.log(reader.result);
-//     };
-//     reader.readAsText(this.files[0]);
-//     reader.onload = function (e) {
-//         wantedWords.push(reader.result);
-//     }
-// });
+//var wantedWords = [];
 
 var wantedWords = [
-    '七',
-]
-// var wantedWords = [
-//     'One',
-//     'Two',
-//     'Three',
-//     'Four',
-//     'Five',
-//     'Six',
-//     'Seven',
-//     'Eight',
-//     'Nine',
-//     'Ten',
-//     '一',
-//     '二',
-//     '三',
-//     '四',
-//     '五',
-//     '六',
-//     '七',
-//     '八',
-//     '九',
-//     '十',
-// ];
+    'One',
+    'Two',
+    'Three',
+    'Four',
+    'Five',
+    "Hi UMEC",
+    '一',
+    '二',
+    '三',
+    '四',
+    '五',
+    '你好 UMEC',
+    // '六',
+    // '七',
+    // '八',
+    // '九',
+    // '十',
+];
 
 var fillerWords = [
     'Dog',
@@ -264,7 +237,7 @@ function getRecordedWords() {
 function getAllWantedWords() {
     var wordCounts = {};
     wantedWords.forEach(function (word) {
-        wordCounts[word] = 3;
+        wordCounts[word] = 1;
     });
     fillerWords.forEach(function (word) {
         wordCounts[word] = 0;
@@ -348,7 +321,7 @@ function startRecording() {
     console.log(mediaRecorder.state);
     console.log("recorder started");
     record.style.background = "red";
-    setTimeout(endRecording, 3500);
+    setTimeout(endRecording, 3000);
 }
 
 function endRecording() {

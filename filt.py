@@ -6,7 +6,7 @@ from pydub import AudioSegment
 import pydub
 
 
-def detect_leading_silence(sound, silence_threshold=-55.0, chunk_size=10):
+def detect_leading_silence(sound, silence_threshold=-50.0, chunk_size=10):
     '''
     sound is a pydub.AudioSegment
     silence_threshold in dB

@@ -19,9 +19,6 @@ RATE = 44100
 
 @app.route("/")
 def welcome():
-    with open('C:\\Users\\jttong\\Desktop\\text.txt') as my_file:
-        values = my_file.readlines()
-
     return render_template("record.html")
 
 
@@ -43,7 +40,7 @@ def upload():
     language = lang_identify(word)
     audio_data = request.data
 
-    filename = fileLocate("C:\\Users\\jttong\\Desktop\\voices\\", number, language, trial_number)
+    filename = fileLocate("\\\\Fps\\rnd\\AIot\\KWS_Data\\voices\\", number, language, trial_number)
 
     audio_data = convert_to_audioSegment(audio_data)
 
@@ -55,4 +52,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

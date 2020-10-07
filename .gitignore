@@ -3,3 +3,6 @@
 .DS_Store
 lib/
 app.yaml
+ffprobe.exe
+ffplay.exe
+ffmpeg.exe
