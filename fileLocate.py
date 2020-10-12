@@ -1,14 +1,14 @@
 import os.path
 
 
-def fileLocate(location, keyword, language, trial):
+def fileLocate(location, keyword, language, name, trial):
     location = location + keyword + "\\" + language + "\\"
     for i in range(1, 10000):
         tId = str(i)
         while (len(tId) != 4):
             tId = "0" + tId
-        tId = location + tId + "_" + trial + ".wav"
-        if not (os.path.isfile(tId)):
+        tId = location + tId + "_" + name + "_" + trial + ".wav"
+        if not (os.path.isfile(tId[0:4])):
             return tId
 
 
@@ -18,8 +18,14 @@ def addZeros(trial):
     return trial
 
 
-umec_dict = {
-
+name_dict = {
+    "Mark": "markmok",
+    "Sean": "seanyong",
+    "Jason": "jttong",
+    "Hong": "chchan",
+    "Walter": "walterchow",
+    "Shawn": "xiaohuo",
+    "Jacob": "jacobmok"
 }
 numb_dict = {
     "One": "1",
@@ -63,6 +69,9 @@ def num_identify(num):
     numba = numb_dict[num]
     return numba
 
+def name_identify(nam):
+    name = name_dict[nam]
+    return name
 
 if __name__ == "__main__":
     fileLocate.run()
