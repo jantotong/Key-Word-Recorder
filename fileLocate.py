@@ -1,15 +1,33 @@
 import os.path
+import re
 
 
 def fileLocate(location, keyword, language, name, trial):
     location = location + keyword + "\\" + language + "\\"
     for i in range(1, 10000):
-        tId = str(i)
-        while (len(tId) != 4):
-            tId = "0" + tId
-        tId = location + tId + "_" + name + "_" + trial + ".wav"
-        if not (os.path.isfile(tId[0:4])):
-            return tId
+        flag = 0
+        numb = str(i)
+        while len(numb) != 4:
+            numb = "0" + numb
+
+        #########
+        if int(trial) == 1:
+            for filepath in os.listdir(location):
+                if re.match(numb, filepath):
+                    flag = 1
+            if flag == 0:
+                return location + numb + "_" + name + "_" + trial + ".wav"
+
+        else:
+            temp = int(numb) + 1
+            stemp = str(temp)
+            while len(stemp) != 4:
+                stemp = "0" + stemp
+            for filepath in os.listdir(location):
+                if re.match(stemp, filepath):
+                    flag = 1
+            if flag == 0:
+                return location + numb + "_" + name + "_" + trial + ".wav"
 
 
 def addZeros(trial):
@@ -69,9 +87,11 @@ def num_identify(num):
     numba = numb_dict[num]
     return numba
 
+
 def name_identify(nam):
     name = name_dict[nam]
     return name
+
 
 if __name__ == "__main__":
     fileLocate.run()

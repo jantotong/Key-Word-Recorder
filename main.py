@@ -44,7 +44,7 @@ def upload():
 
     audio_data = request.data
 
-    #filename for server
+    # filename for server
     filename = fileLocate("\\\\Fps\\rnd\\AIot\\KWS_Data\\voices\\", number, language, name, trial_number)
 
     local_filename = fileLocate("C:\\Users\\jttong\\Desktop\\voices\\", number, language, name, trial_number)
