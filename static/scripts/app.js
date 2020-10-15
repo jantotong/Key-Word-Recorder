@@ -21,6 +21,8 @@ var ignoreAutoPlay = false;
 stop.disabled = true;
 upload.disabled = true;
 
+var tries = 1;
+
 // visualiser setup - create web audio api context and canvas
 
 var audioCtx = new (window.AudioContext || webkitAudioContext)();
@@ -180,40 +182,31 @@ function visualize(stream) {
     }
 }
 
-//var wantedWords = [];
 
-var wantedWords = [
-    'One',
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+var englishWords = ['One',
     'Two',
     'Three',
     'Four',
     'Five',
-    "Hi UMEC",
-    '一',
+    "Hi UMEC",];
+var chineseWords = ['一',
     '二',
     '三',
     '四',
     '五',
-    '你好 UMEC',
-    // '六',
-    // '七',
-    // '八',
-    // '九',
-    // '十',
-];
+    '你好 UMEC',];
 
-var fillerWords = [
-    'Dog',
-    'Cat',
-    'Bird',
-    'Tree',
-    'Marvin',
-    'Sheila',
-    'House',
-    'Bed',
-    'Wow',
-    'Happy',
-];
+var wantedWords = englishWords.concat(chineseWords);
+
 // Reading data in utf-8 format
 // which is a type of character set.
 // Instead of 'utf-8' it can be
@@ -237,10 +230,7 @@ function getRecordedWords() {
 function getAllWantedWords() {
     var wordCounts = {};
     wantedWords.forEach(function (word) {
-        wordCounts[word] = 1;
-    });
-    fillerWords.forEach(function (word) {
-        wordCounts[word] = 0;
+        wordCounts[word] = tries;
     });
     return wordCounts;
 }
@@ -276,27 +266,30 @@ function unrollWordCounts(wordCounts) {
     return result;
 }
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
+var banta = 0;
+
 
 function getNextWord() {
-    var remainingWords = unrollWordCounts(getRemainingWords());
-    if (remainingWords.length == 0) {
+    var loyt;
+    if(banta == (wantedWords.length*tries)){
         return null;
     }
-    shuffleArray(remainingWords);
-    return remainingWords[0];
+    else if(banta<(wantedWords.length*tries)/2){
+         loyt = englishWords[banta%englishWords.length];
+    }
+    else{
+        loyt =  chineseWords[banta%chineseWords.length];
+    }
+    banta++;
+    return loyt;
 }
 
 function getProgressDescription() {
     var allWords = unrollWordCounts(getAllWantedWords());
     var remainingWords = unrollWordCounts(getRemainingWords());
+    if (((allWords.length) - remainingWords.length) == allWords.length / 2) {
+        alert("Now read out in Mandarin\n現在說普通話");
+    }
     return ((allWords.length + 1) - remainingWords.length) + "/" + allWords.length;
 }
 
@@ -321,7 +314,7 @@ function startRecording() {
     console.log(mediaRecorder.state);
     console.log("recorder started");
     record.style.background = "red";
-    setTimeout(endRecording, 3000);
+    setTimeout(endRecording, 2000);
 }
 
 function endRecording() {
@@ -369,9 +362,11 @@ function uploadNextClip() {
     xhr.onload = function (e) {
         if (this.status == 200) { //if successful response
             var blob = this.response;
+
+            var e = document.getElementById("ddlViewBy");
+            var strUser = e.options[e.selectedIndex].value;
             var ajaxRequest = new XMLHttpRequest();
-            //var uploadUrl = 'C:\\Users\\jttong\\Desktop\\mk.wav';
-            ajaxRequest.open('POST', "/upload?word=" + word + '&trialN=' + trialN, true);
+            ajaxRequest.open('POST', "/upload?word=" + word + '&trialN=' + trialN + "&name=" + strUser, true);
             ajaxRequest.setRequestHeader('Content-Type', 'application/json');
             ajaxRequest.onreadystatechange = function () {
                 if (ajaxRequest.readyState == 4) { //request finished and ready
