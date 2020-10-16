@@ -21,7 +21,7 @@ var ignoreAutoPlay = false;
 stop.disabled = true;
 upload.disabled = true;
 
-var tries = 1;
+var tries = 3;
 
 // visualiser setup - create web audio api context and canvas
 
@@ -197,7 +197,8 @@ var englishWords = ['One',
     'Three',
     'Four',
     'Five',
-    "Hi UMEC",];
+    "Hi UMEC",
+    "UMEC"];
 var chineseWords = ['一',
     '二',
     '三',
@@ -271,14 +272,16 @@ var banta = 0;
 
 function getNextWord() {
     var loyt;
-    if(banta == (wantedWords.length*tries)){
+    if (banta == (wantedWords.length * tries)) {
         return null;
-    }
-    else if(banta<(wantedWords.length*tries)/2){
-         loyt = englishWords[banta%englishWords.length];
-    }
-    else{
-        loyt =  chineseWords[banta%chineseWords.length];
+    } else if (banta >= englishWords.length * tries) {
+        if (englishWords.length > chineseWords.length) {
+            loyt = chineseWords[(banta - tries) % chineseWords.length];
+        } else {
+            loyt = chineseWords[banta % chineseWords.length];
+        }
+    } else {
+        loyt = englishWords[banta % englishWords.length];
     }
     banta++;
     return loyt;
@@ -287,7 +290,7 @@ function getNextWord() {
 function getProgressDescription() {
     var allWords = unrollWordCounts(getAllWantedWords());
     var remainingWords = unrollWordCounts(getRemainingWords());
-    if (((allWords.length) - remainingWords.length) == allWords.length / 2) {
+    if (((allWords.length) - remainingWords.length) == (englishWords.length * tries)) {
         alert("Now read out in Mandarin\n現在說普通話");
     }
     return ((allWords.length + 1) - remainingWords.length) + "/" + allWords.length;

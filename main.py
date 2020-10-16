@@ -6,16 +6,12 @@ from flask import render_template
 from flask import request
 from pydub import AudioSegment
 from filt import convert_to_audioSegment
-from fileLocate import fileLocate, addZeros, lang_identify, num_identify, name_identify
+from fileLocate import fileLocate, addZeros, lang_identify, num_identify
 from io import BytesIO
 
 import uuid
 
 app = Flask(__name__)
-THRESHOLD = 500
-CHUNK_SIZE = 1024
-FORMAT = pyaudio.paInt16
-RATE = 44100
 
 
 @app.route("/")
@@ -54,6 +50,7 @@ def upload():
     audio_data = convert_to_audioSegment(audio_data)
 
     audio_data.export(filename, format="wav")
+
     audio_data.export(local_filename, format="wav")
 
     # with open(filename, 'wb') as f:

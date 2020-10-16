@@ -16,7 +16,7 @@ html, body {
 .image {
   display: block;
   margin-left: 275px;
-  width: 50%;
+  width: 80%;
 }
 
 body {
@@ -222,4 +222,3 @@ footer a {
 .progress-display{
     font-size: 130px;
 }
-
