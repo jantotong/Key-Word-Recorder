@@ -1,8 +1,3 @@
-navigator.getUserMedia = (navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia);
-
 // set up basic variables for app
 
 var record = document.querySelector('.record');
@@ -17,7 +12,7 @@ var mediaStreamSource = null;
 var ignoreAutoPlay = false;
 
 // disable stop button while not recording
-
+//MAKES THEM GRAY
 stop.disabled = true;
 upload.disabled = true;
 
@@ -28,108 +23,110 @@ var tries = 3;
 var audioCtx = new (window.AudioContext || webkitAudioContext)();
 var canvasCtx = canvas.getContext("2d");
 
+audioCtx.sampleRate = 48000;
+
 //main block for doing the audio recording
 
-if (navigator.getUserMedia) {
+if (navigator.mediaDevices.getUserMedia) {
+
     console.log('getUserMedia supported.');
 
     var constraints = {audio: true};
     var chunks = [];
 
-    var onSuccess = function (stream) {
-        mediaRecorder = new MediaRecorder(stream);
-        mediaStreamSource = audioCtx.createMediaStreamSource(stream);
-        record.onclick = function () {
-            visualize(stream);
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then(function (stream) {
+            mediaRecorder = new MediaRecorder(stream);
+            mediaStreamSource = audioCtx.createMediaStreamSource(stream);
+            record.onclick = function () {
+                visualize(stream);
 
-            // Display a countdown before recording starts.
-            var progress = document.querySelector('.progress-display');
-            progress.innerText = "3";
-            document.querySelector('.info-display').innerText = "";
-            setTimeout(function () {
-                progress.innerText = "2";
+                // Display a countdown before recording starts.
+                var progress = document.querySelector('.progress-display');
+                progress.innerText = "3";
+                document.querySelector('.info-display').innerText = "";
                 setTimeout(function () {
-                    progress.innerText = "1";
+                    progress.innerText = "2";
                     setTimeout(function () {
-                        progress.style.fontSize = "xx-large";
-                        progress.innerText = "";
-                        startRecording();
+                        progress.innerText = "1";
+                        setTimeout(function () {
+                            progress.style.fontSize = "xx-large";
+                            progress.innerText = "";
+                            startRecording();
+                        }, 1000);
                     }, 1000);
                 }, 1000);
-            }, 1000);
-            stop.disabled = false;
-            record.disabled = true;
-        }
-
-        stop.onclick = function () {
-            if (mediaRecorder.state == 'inactive') {
-                // The user has already pressed stop, so don't set up another word.
-                ignoreAutoPlay = true;
-            } else {
-                mediaRecorder.stop();
+                stop.disabled = false;
+                record.disabled = true;
             }
-            mediaStreamSource.disconnect();
-            console.log(mediaRecorder.state);
-            record.style.background = "";
 
-            record.style.color = "";
-            stop.disabled = true;
-            record.disabled = false;
-        }
+            stop.onclick = function () {
+                if (mediaRecorder.state == 'inactive') {
+                    // The user has already pressed stop, so don't set up another word.
+                    ignoreAutoPlay = true;
+                } else {
+                    mediaRecorder.stop();
+                }
+                mediaStreamSource.disconnect();
+                console.log(mediaRecorder.state);
+                record.style.background = "";
 
-        upload.onclick = function () {
-            saveRecordings();
-        }
-
-        mediaRecorder.onstop = function (e) {
-            console.log("data available after MediaRecorder.stop() called.");
-
-            var clipName = document.querySelector('.info-display').innerText;
-            var clipContainer = document.createElement('article');
-            var clipLabel = document.createElement('p');
-            var audio = document.createElement('audio');
-            var deleteButton = document.createElement('button');
-
-            clipContainer.classList.add('clip');
-            clipLabel.classList.add('clip-label');
-            audio.setAttribute('controls', '');
-            deleteButton.textContent = 'Delete';
-            deleteButton.className = 'delete';
-            clipLabel.textContent = clipName;
-
-            clipContainer.appendChild(audio);
-            clipContainer.appendChild(clipLabel);
-            clipContainer.appendChild(deleteButton);
-            soundClips.appendChild(clipContainer);
-
-            audio.controls = true;
-            var blob = new Blob(chunks, {'type': 'audio/wav; codecs=opus'});
-            chunks = [];
-            var audioURL = window.URL.createObjectURL(blob);
-            audio.src = audioURL;
-            console.log("recorder stopped");
-
-            deleteButton.onclick = function (e) {
-                evtTgt = e.target;
-                evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-                updateProgress();
+                record.style.color = "";
+                stop.disabled = true;
+                record.disabled = false;
             }
-        }
 
-        mediaRecorder.ondataavailable = function (e) {
-            chunks.push(e.data);
-        }
-    }
+            upload.onclick = function () {
+                saveRecordings();
+            }
 
-    var onError = function (err) {
-        console.log('The following error occured: ' + err);
-    }
+            mediaRecorder.onstop = function (e) {
+                console.log("data available after MediaRecorder.stop() called.");
 
-    navigator.getUserMedia(constraints, onSuccess, onError);
+                var clipName = document.querySelector('.info-display').innerText;
+                var clipContainer = document.createElement('article');
+                var clipLabel = document.createElement('p');
+                var audio = document.createElement('audio');
+                var deleteButton = document.createElement('button');
+
+                clipContainer.classList.add('clip');
+                clipLabel.classList.add('clip-label');
+                audio.setAttribute('controls', '');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'delete';
+                clipLabel.textContent = clipName;
+
+                clipContainer.appendChild(audio);
+                clipContainer.appendChild(clipLabel);
+                clipContainer.appendChild(deleteButton);
+                soundClips.appendChild(clipContainer);
+
+                audio.controls = true;
+                var blob = new Blob(chunks, {'type': 'audio/wav; codecs=opus'});
+                chunks = [];
+                var audioURL = window.URL.createObjectURL(blob);
+                audio.src = audioURL;
+                console.log("recorder stopped");
+
+                deleteButton.onclick = function (e) {
+                    evtTgt = e.target;
+                    evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+                    updateProgress();
+                }
+            }
+
+            mediaRecorder.ondataavailable = function (e) {
+                chunks.push(e.data);
+            }
+        })
+
+        .catch(function (err) {
+            console.log('The following error occurred: ' + err);
+        })
+
 } else {
-    console.log('getUserMedia not supported on your browser!');
     document.querySelector('.info-display').innerText =
-        'Your device does not support the HTML5 API needed to record audio (this is a known problem on iOS)';
+        'Unfortuante';
 }
 
 function visualize(stream) {
@@ -183,14 +180,14 @@ function visualize(stream) {
 }
 
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
+// function shuffleArray(array) {
+//     for (var i = array.length - 1; i > 0; i--) {
+//         var j = Math.floor(Math.random() * (i + 1));
+//         var temp = array[i];
+//         array[i] = array[j];
+//         array[j] = temp;
+//     }
+// }
 
 var englishWords = ['One',
     'Two',
@@ -291,7 +288,7 @@ function getProgressDescription() {
     var allWords = unrollWordCounts(getAllWantedWords());
     var remainingWords = unrollWordCounts(getRemainingWords());
     if (((allWords.length) - remainingWords.length) == (englishWords.length * tries)) {
-        alert("Now read out in Mandarin\n現在說普通話");
+        alert("Now read out in Mandarin, next letter is 'Yi'\n現在說普通話, 按確定後讀'一'");
     }
     return ((allWords.length + 1) - remainingWords.length) + "/" + allWords.length;
 }
