@@ -1,7 +1,4 @@
 import os
-
-import OpenSSL
-from OpenSSL import SSL
 from flask import Flask
 from flask import make_response
 from flask import redirect
@@ -52,7 +49,7 @@ def upload():
 
     audio_data = convert_to_audioSegment(audio_data)
 
-    # audio_data.export(filename, format="wav")
+    audio_data.export(filename, format="wav")
 
     audio_data.export(local_filename, format="wav")
 
@@ -65,6 +62,6 @@ def upload():
 if __name__ == "__main__":
 
     #app.run(host="0.0.0.0")
-    app.run(ssl_context=('cert.pem', 'key.pem'), host='192.168.2.110', threaded=True, port=5000)
+    app.run(ssl_context=('cert.pem', 'key.pem'), host='192.168.2.128', threaded=True, port=5000)
     # need to make SSL connnection
     # app.run()

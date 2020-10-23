@@ -11,17 +11,60 @@
     <div class="image">
         <img src="static/styles/umec.jpg" height="80">
     </div>
-
     <header>
         <h1>Speech Recorder</h1>
     </header>
 
+    <br/>
+
+    <h3> Please Choose Name </h3>
+    <select id="ddlViewBy">
+        <option value="null">Select</option>
+        <option value="jttong">Jason</option>
+        <option value="markmok">Mark</option>
+        <option value="seanyong">Sean</option>
+        <option value="chchan">Hong</option>
+        <option value="walterchow">Walter</option>
+        <option value="xiaohuo">Shawn</option>
+        <option value="jacobmok">Jacob</option>
+        <option value="mcchan">Man Chi</option>
+        <option value="viannechan">Vianne</option>
+        <option value="hzchen">Hong Zao</option>
+        <option value="kaytoncheung">Kayton</option>
+        <option value="khchiu">King Hung</option>
+        <option value="kacychoi">Kacy</option>
+        <option value="davidchu">David</option>
+        <option value="pcchung">Ryan</option>
+        <option value="mkieong">Mei Kei</option>
+        <option value="yzjiao">Yu Zhong</option>
+        <option value="ylan">Ying</option>
+        <option value="yuanlei">Yuan</option>
+        <option value="shali">Sha</option>
+        <option value="shenglin">Sheng</option>
+        <option value="ykli">Yiu Kei</option>
+        <option value="carmenliu">Carmen</option>
+        <option value="dicklui">Dick</option>
+        <option value="pengluo">Peng</option>
+        <option value="twshen">Tak Wai</option>
+        <option value="stephaniesong">Stephanie</option>
+        <option value="dpwang">Dong Peng</option>
+        <option value="fionawang">Fiona</option>
+        <option value="yotoyi">Yoto</option>
+        <option value="linlew">Lin</option>
+
+
+    </select>
 
     <section class="top-display">
         <div class="directions">
-            Press Record to start.
+            Press Record to start
             <br/>
-            Must finish all recordings before upload.
+            First speak English characters, then Chinese characters
+            <br/>
+            Speak when the Record button turns red
+            <br/>
+            UMEC pronounced as "YU-MAC"
+            <br/>
         </div>
         <div class="progress-display">
         </div>
@@ -44,10 +87,9 @@
 </div>
 
 <footer>
-    <a>UMEC</a>
+    <a>UMEC(HK)</a>
 </footer>
-
-<script src="static/scripts/app.js"></script>
+<script src="{{url_for('static', filename='/scripts/app.js')}}"></script>
 
 </body>
 </html>

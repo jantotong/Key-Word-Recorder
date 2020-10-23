@@ -23,6 +23,7 @@ def fileLocate(location, keyword, language, name, trial):
             temp = int(numb) + 1
             stemp = str(temp)
             while len(stemp) != 4:
+
                 stemp = "0" + stemp
             for filepath in os.listdir(location):
                 if re.match(stemp, filepath):
