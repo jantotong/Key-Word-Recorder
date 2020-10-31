@@ -18,6 +18,15 @@ app = Flask(__name__)
 def welcome():
     return render_template("record.html")
 
+
+@app.route("/start")
+def start():
+    response = make_response(redirect('/'))
+    session_id = uuid.uuid4().hex
+    response.set_cookie('session_id', session_id)
+    return response
+
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     word = request.args.get('word')
