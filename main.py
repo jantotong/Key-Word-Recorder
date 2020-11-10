@@ -1,18 +1,18 @@
-import os
 from flask import Flask
 from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import request
 from pydub import AudioSegment
+
 from filt import convert_to_audioSegment
+from gcloudFileLocate import gcloudFileLocate
 from fileLocate import fileLocate, addZeros, lang_identify, num_identify
 from io import BytesIO
-
+from google.cloud import storage
 import uuid
 
 app = Flask(__name__)
-
 
 @app.route("/")
 def welcome():
@@ -40,28 +40,27 @@ def upload():
 
     audio_data = request.data
 
-    # filename for server
-    filename = fileLocate("\\\\Fps\\rnd\\AIot\\KWS_Data\\voices\\", number, language, name, trial_number)
-
-    local_filename = fileLocate("C:\\Users\\jttong\\Desktop\\voices\\", number, language, name, trial_number)
+    gcloud_filename = gcloudFileLocate("voices/", number, language, name, trial_number)
 
     audio_data = (AudioSegment.from_file(BytesIO(audio_data)))
 
     audio_data = convert_to_audioSegment(audio_data)
+    ######################################################
 
-    audio_data.export(filename, format="wav")
+    storage_client = storage.Client(project="key-words-recorder"    )
 
-    audio_data.export(local_filename, format="wav")
+    bucket = storage_client.bucket("key-words-recorder.appspot.com")
 
-    # with open(filename, 'wb') as f:
-    #     f.write(audio_data)
+    blob = bucket.blob(gcloud_filename)
+
+    #################################################
+
+    gcloud_audio = audio_data.export()
+
+    blob.upload_from_file(gcloud_audio, content_type='wav')
 
     return make_response('All good')
 
 
 if __name__ == "__main__":
-
-    #app.run(host="0.0.0.0")
-    app.run(ssl_context=('cert.pem', 'key.pem'), host='192.168.2.128', threaded=True, port=5000)
-    # need to make SSL connnection
-    # app.run()
+    app.run(ssl_context=('cert.pem', 'key.pem'), threaded=True)
