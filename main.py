@@ -64,4 +64,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'), threaded=True, port=5000, debug=True)
+    app.run(host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'), threaded=True, port=80, debug=True)
