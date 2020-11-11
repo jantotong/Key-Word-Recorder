@@ -1,4 +1,8 @@
 // set up basic variables for app
+navigator.getUserMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
 
 var record = document.querySelector('.record');
 var stop = document.querySelector('.stop');
@@ -16,7 +20,7 @@ var ignoreAutoPlay = false;
 stop.disabled = true;
 upload.disabled = true;
 
-var tries = 3;
+var tries = 1;
 
 // visualiser setup - create web audio api context and canvas
 
@@ -68,7 +72,6 @@ if (navigator.mediaDevices.getUserMedia) {
                     mediaRecorder.stop();
                 }
                 mediaStreamSource.disconnect();
-                console.log(mediaRecorder.state);
                 record.style.background = "";
 
                 record.style.color = "";
@@ -175,7 +178,6 @@ function visualize(stream) {
 
         canvasCtx.lineTo(canvas.width, canvas.height / 2);
         canvasCtx.stroke();
-        console.log(wantedWords);
     }
 }
 
@@ -191,17 +193,20 @@ function visualize(stream) {
 
 var englishWords = ['One',
     'Two',
-    'Three',
-    'Four',
-    'Five',
-    "Hi UMEC",
-    "UMEC"];
-var chineseWords = ['一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '你好 UMEC',];
+    // 'Three',
+    // 'Four',
+    // 'Five',
+    // "Hi UMEC",
+    // "UMEC"
+];
+ var chineseWords = [
+// '一',
+//     '二',
+//     '三',
+//     '四',
+//     '五',
+//     '你好 UMEC',
+];
 
 var wantedWords = englishWords.concat(chineseWords);
 
