@@ -28,7 +28,7 @@ def start():
     return response
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['POST'])
 def upload():
     word = request.args.get('word')
     trial_number = request.args.get('trialN')
