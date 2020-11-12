@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" id="main">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Open Speech Recording</title>
     <link href="static/styles/app.css" rel="stylesheet" type="text/css">
 </head>
@@ -17,7 +16,7 @@
 
     <br/>
 
-    <h3> Please Choose Name </h3>
+    <!--
     <select id="ddlViewBy">
         <option value="null">Select</option>
         <option value="jttong">Jason</option>
@@ -54,6 +53,15 @@
 
 
     </select>
+    -->
+    <body onkeypress="showChar(event);">
+
+
+    <form style="text-align:center;">
+    <h3> Enter Your Name </h3>
+
+        <input type="text" id="user_name">
+    </form>
 
     <section class="top-display">
         <div class="directions">

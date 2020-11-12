@@ -48,7 +48,7 @@ def upload():
     audio_data = convert_to_audioSegment(audio_data)
     ######################################################
 
-    storage_client = storage.Client(project="key-words-recorder"    )
+    storage_client = storage.Client(project="key-words-recorder")
 
     bucket = storage_client.bucket("key-words-recorder.appspot.com")
 

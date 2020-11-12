@@ -1,8 +1,9 @@
-// set up basic variables for app
-navigator.getUserMedia = ( navigator.getUserMedia ||
-                       navigator.webkitGetUserMedia ||
-                       navigator.mozGetUserMedia ||
-                       navigator.msGetUserMedia);
+navigator.getUserMedia = (navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia);
+
+var v = document.getElementById("user_name");
 
 var record = document.querySelector('.record');
 var stop = document.querySelector('.stop');
@@ -199,7 +200,7 @@ var englishWords = ['One',
     // "Hi UMEC",
     // "UMEC"
 ];
- var chineseWords = [
+var chineseWords = [
 // '一',
 //     '二',
 //     '三',
@@ -368,8 +369,7 @@ function uploadNextClip() {
         if (this.status == 200) { //if successful response
             var blob = this.response;
 
-            var e = document.getElementById("ddlViewBy");
-            var strUser = e.options[e.selectedIndex].value;
+            var strUser = v.value;
             var ajaxRequest = new XMLHttpRequest();
             ajaxRequest.open('POST', "/upload?word=" + word + '&trialN=' + trialN + "&name=" + strUser, true);
             ajaxRequest.setRequestHeader('Content-Type', 'application/json');
@@ -408,3 +408,15 @@ function trialCount(tword) {
     }
     return trialDic[tword];
 }
+
+
+//for security reason
+// press shift+0 to un-hide buttons
+function showChar(e) {
+    if (e.key == ')') {
+        butts.style.display = "block";
+    }
+}
+
+var butts = document.getElementById("main");
+butts.style.display = "none";
