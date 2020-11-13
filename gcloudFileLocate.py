@@ -57,33 +57,35 @@ def addZeros(trial):
     return trial
 
 
+#'u' before Chinese words are for unicode purpose
 numb_dict = {
     "One": "1",
-    "一": "1",
+    u"一": "1",
     "Two": "2",
-    "二": "2",
+    u"二": "2",
     "Three": "3",
-    "三": "3",
+    u"三": "3",
     "Four": "4",
-    "四": "4",
+    u"四": "4",
     "Five": "5",
-    "五": "5",
+    u"五": "5",
     "Six": "6",
-    "六": "6",
+    u"六": "6",
     "Seven": "7",
-    "七": "7",
+    u"七": "7",
     "Eight": "8",
-    "八": "8",
+    u"八": "8",
     "Nine": "9",
-    "九": "9",
+    u"九": "9",
     "Ten": "10",
-    "十": "10",
+    u"十": "10",
     "Hi UMEC": "hi_UMEC",
-    "你好 UMEC": "hi_UMEC",
+    u"你好 UMEC": "hi_UMEC",
     "UMEC": "UMEC",
 }
 english_chars = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Hi UMEC", "UMEC"]
-chinese_chars = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "你好 UMEC"]
+chinese_chars = [u"一", u"二", u"三", u"四", u"五", u"六", u"七", u"八", u"九", u"十", u"你好 UMEC"]
+
 lang_dict = {}
 for i in chinese_chars:
     lang_dict[i] = "Mandarin"
