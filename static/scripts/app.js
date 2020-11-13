@@ -417,7 +417,7 @@ var butts = document.getElementById("main");
 var buttss = document.getElementById("instruction");
 
 
-function showtime(e){
+function showtime(e) {
     butts.style.display = "block";
     buttss.style.display = "block";
 
@@ -428,8 +428,7 @@ if (document.cookie == "ccc") {
     butts.style.display = "block";
     buttss.style.display = "block";
 
-}
-else{
+} else {
     butts.style.display = "none";
-    buttss.style.display = "block";
+    buttss.style.display = "none";
 }
