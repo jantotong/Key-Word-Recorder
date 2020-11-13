@@ -413,16 +413,23 @@ function showChar(e) {
     }
 }
 
+var butts = document.getElementById("main");
+var buttss = document.getElementById("instruction");
+
+
 function showtime(e){
     butts.style.display = "block";
+    buttss.style.display = "block";
+
     document.cookie = 'ccc';
 }
 
-var butts = document.getElementById("main");
-
 if (document.cookie == "ccc") {
     butts.style.display = "block";
+    buttss.style.display = "block";
+
 }
 else{
     butts.style.display = "none";
+    buttss.style.display = "block";
 }
