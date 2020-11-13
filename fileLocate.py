@@ -73,12 +73,12 @@ for i in english_chars:
 
 
 def lang_identify(word):
-    language = lang_dict.get(word)
+    language = lang_dict[word]
     return language
 
 
 def num_identify(num):
-    numba = numb_dict.get(num)
+    numba = numb_dict[num]
     return numba
 
 
