@@ -2,12 +2,11 @@
 <html lang="en-us">
 <head>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Open Speech Recording</title>
-    <p ontouchstart="showtime(event)">XDDDDDDD</p>
-    <link href="static/styles/app.css" rel="stylesheet" type="text/css">
+    <title ontouchstart="showtime(event)">Open Speech Recording</title>
+         <link href="static/styles/app.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="wrapper" id="main">
+<div class="wrapper">
     <div class="image">
         <img src="static/styles/umec.jpg" height="80">
     </div>
@@ -81,7 +80,7 @@
         </div>
     </section>
 
-    <section class="main-controls">
+    <section class="main-controls" id="main">
         <canvas class="visualizer"></canvas>
         <div id="buttons">
             <button class="record">Record</button>

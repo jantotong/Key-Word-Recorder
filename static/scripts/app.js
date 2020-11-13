@@ -194,28 +194,22 @@ function visualize(stream) {
 
 var englishWords = ['One',
     'Two',
-    // 'Three',
-    // 'Four',
-    // 'Five',
-    // "Hi UMEC",
-    // "UMEC"
+    'Three',
+    'Four',
+    'Five',
+    "Hi UMEC",
+    "UMEC"
 ];
 var chineseWords = [
-// '一',
-//     '二',
-//     '三',
-//     '四',
-//     '五',
-//     '你好 UMEC',
+    '一',
+    '二',
+    '三',
+    '四',
+    '五',
+    '你好 UMEC',
 ];
 
 var wantedWords = englishWords.concat(chineseWords);
-
-// Reading data in utf-8 format
-// which is a type of character set.
-// Instead of 'utf-8' it can be
-// other character set also like 'ascii'
-
 
 function getRecordedWords() {
     var wordElements = document.querySelectorAll('.clip-label');
