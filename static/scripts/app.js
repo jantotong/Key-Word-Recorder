@@ -418,6 +418,11 @@ function showChar(e) {
     }
 }
 
+function showtime(e){
+    butts.style.display = "block";
+    document.cookie = 'ccc';
+}
+
 var butts = document.getElementById("main");
 
 if (document.cookie == "ccc") {
