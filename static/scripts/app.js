@@ -192,21 +192,22 @@ function visualize(stream) {
 //     }
 // }
 
-var englishWords = ['One',
-    'Two',
-    'Three',
-    'Four',
-    'Five',
-    "Hi UMEC",
-    "UMEC"
+var englishWords = [
+    // 'One',
+    // 'Two',
+    // 'Three',
+    // 'Four',
+    // 'Five',
+    // "Hi UMEC",
+    // "UMEC"
 ];
 var chineseWords = [
     '一',
     '二',
-    '三',
-    '四',
-    '五',
-    '你好 UMEC',
+    // '三',
+    // '四',
+    // '五',
+    // '你好 UMEC',
 ];
 
 var wantedWords = englishWords.concat(chineseWords);
