@@ -78,7 +78,7 @@ def lang_identify(word):
 
 
 def num_identify(num):
-    numba = numb_dict[num]
+    numba = numb_dict.get(num)
     return numba
 
 if __name__ == "__main__":
