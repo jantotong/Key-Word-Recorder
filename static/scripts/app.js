@@ -394,6 +394,7 @@ function uploadNextClip() {
 }
 
 function allDone() {
+    document.cookie = 'all_done=true; path=/';
     location.reload(true);
 }
 
@@ -414,15 +415,8 @@ function trialCount(tword) {
 function showChar(e) {
     if (e.key == ')') {
         butts.style.display = "block";
-        document.cookie = 'ccc';
     }
 }
 
 var butts = document.getElementById("main");
-
-if (document.cookie == "ccc") {
-    butts.style.display = "block";
-}
-else{
-    butts.style.display = "none";
-}
+butts.style.display = "none";
