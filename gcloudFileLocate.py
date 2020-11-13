@@ -91,14 +91,13 @@ for i in english_chars:
 
 
 def lang_identify(word):
-    language = lang_dict[word]
+    language = lang_dict.get(word)
     return language
 
 
 def num_identify(num):
-    numba = numb_dict[num]
+    numba = numb_dict.get(num)
     return numba
-
 
 if __name__ == "__main__":
     pass

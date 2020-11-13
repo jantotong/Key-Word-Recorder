@@ -73,7 +73,7 @@ for i in english_chars:
 
 
 def lang_identify(word):
-    language = lang_dict[word]
+    language = lang_dict.get(word)
     return language
 
 

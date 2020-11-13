@@ -21,7 +21,7 @@ var ignoreAutoPlay = false;
 stop.disabled = true;
 upload.disabled = true;
 
-var tries = 3;
+var tries = 1;
 
 // visualiser setup - create web audio api context and canvas
 
