@@ -409,6 +409,7 @@ function trialCount(tword) {
 function showChar(e) {
     if (e.key == ')') {
         butts.style.display = "block";
+        buttss.style.display = "block";
         document.cookie = 'ccc';
     }
 }
