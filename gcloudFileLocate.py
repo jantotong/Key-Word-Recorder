@@ -5,6 +5,7 @@ from google.cloud import storage
 
 
 def gcloudFileLocate(location, keyword, language, name, trial):
+
     location = location + keyword + "/" + language + "/"
 
     storage_client = storage.Client("key-words-recorder")

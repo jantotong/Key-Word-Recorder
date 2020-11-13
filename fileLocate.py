@@ -11,20 +11,19 @@ def fileLocate(location, keyword, language, name, trial):
         while len(numb) != 4:
             numb = "0" + numb
 
-        #Must be a new number
+        # Must be a new number
         if int(trial) == 1:
             for filepath in os.listdir(location):
                 if re.match(numb, filepath):
                     flag = 1
             if flag == 0:
                 return location + numb + "_" + name + "_" + trial + ".wav"
-        #Must not be a new number
+        # Must not be a new number
         else:
-            #find next number, if doesn't exist, this is the one
+            # find next number, if doesn't exist, this is the one
             temp = int(numb) + 1
             stemp = str(temp)
             while len(stemp) != 4:
-
                 stemp = "0" + stemp
             for filepath in os.listdir(location):
                 if re.match(stemp, filepath):
@@ -37,6 +36,7 @@ def addZeros(trial):
     while (len(trial) != 2):
         trial = "0" + trial
     return trial
+
 
 numb_dict = {
     "One": "1",
@@ -61,7 +61,7 @@ numb_dict = {
     "十": "10",
     "Hi UMEC": "hi_UMEC",
     "你好 UMEC": "hi_UMEC",
-    "UMEC" : "UMEC",
+    "UMEC": "UMEC",
 }
 english_chars = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Hi UMEC", "UMEC"]
 chinese_chars = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "你好 UMEC"]
@@ -73,13 +73,14 @@ for i in english_chars:
 
 
 def lang_identify(word):
-    language = lang_dict.get(word)
+    language = lang_dict.get("u"+word)
     return language
 
 
 def num_identify(num):
-    numba = numb_dict.get(num)
+    numba = numb_dict.get("u"+num)
     return numba
+
 
 if __name__ == "__main__":
     fileLocate.run()
