@@ -40,9 +40,9 @@ def addZeros(trial):
 
 numb_dict = {
     "One": "1",
-    "一": "1",
+    u"一": "1",
     "Two": "2",
-    "二": "2",
+    u"二": "2",
     "Three": "3",
     "三": "3",
     "Four": "4",
@@ -64,7 +64,7 @@ numb_dict = {
     "UMEC": "UMEC",
 }
 english_chars = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Hi UMEC", "UMEC"]
-chinese_chars = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "你好 UMEC"]
+chinese_chars = [u"一", u"二", "三", "四", "五", "六", "七", "八", "九", "十", "你好 UMEC"]
 lang_dict = {}
 for i in chinese_chars:
     lang_dict[i] = "Mandarin"
@@ -73,12 +73,12 @@ for i in english_chars:
 
 
 def lang_identify(word):
-    language = lang_dict.get("u"+word)
+    language = lang_dict.get(word)
     return language
 
 
 def num_identify(num):
-    numba = numb_dict.get("u"+num)
+    numba = numb_dict.get(num)
     return numba
 
 
