@@ -3,7 +3,7 @@ navigator.getUserMedia = (navigator.getUserMedia ||
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia);
 
-var v = document.getElementById("user_name");
+var username = document.getElementById("user_name");
 
 var record = document.querySelector('.record');
 var stop = document.querySelector('.stop');
@@ -315,7 +315,12 @@ function startRecording() {
     console.log(mediaRecorder.state);
     console.log("recorder started");
     record.style.background = "red";
-    setTimeout(endRecording, 2000);
+    //For long-words, give double amount of time
+    if (word == "你好 UMEC" || word == "Hi UMEC") {
+        setTimeout(endRecording, 4000);
+    } else {
+        setTimeout(endRecording, 2000);
+    }
 }
 
 function endRecording() {
@@ -349,7 +354,21 @@ function saveRecordings() {
     uploadNextClip();
 }
 
+
+function changeBoxColor() {
+    var strUser = username.value;
+    var usrName_itg = (!/[^a-zA-Z]/.test(strUser));
+    usrName_itg = (!/[^a-zA-Z]/.test(strUser));
+    if (usrName_itg == false) {
+        document.getElementById("name_box").style.color = "red";
+    } else {
+        document.getElementById("name_box").style.color = "green";
+    }
+}
+
 function uploadNextClip() {
+    var strUser = username.value;
+    var usrName_itg = (!/[^a-zA-Z]/.test(strUser));
     document.querySelector('.progress-display').innerText = 'Uploading clip ' +
         clipIndex + '/' + unrollWordCounts(getAllWantedWords()).length;
     var clip = allClips[clipIndex];
@@ -364,25 +383,32 @@ function uploadNextClip() {
         if (this.status == 200) { //if successful response
             var blob = this.response;
 
-            var strUser = v.value;
+
             var ajaxRequest = new XMLHttpRequest();
-            ajaxRequest.open('POST', "/upload?word=" + word + '&trialN=' + trialN + "&name=" + strUser, true);
-            ajaxRequest.setRequestHeader('Content-Type', 'application/json');
-            ajaxRequest.onreadystatechange = function () {
-                if (ajaxRequest.readyState == 4) { //request finished and ready
-                    if (ajaxRequest.status === 200) {
-                        clipIndex += 1;
-                        if (clipIndex < allClips.length) {
-                            uploadNextClip();
+            if (usrName_itg == true) {
+                if (strUser = " ") {
+                    strUser = "null";
+                }
+                ajaxRequest.open('POST', "/upload?word=" + word + '&trialN=' + trialN + "&name=" + strUser, true);
+                ajaxRequest.setRequestHeader('Content-Type', 'application/json');
+                ajaxRequest.onreadystatechange = function () {
+                    if (ajaxRequest.readyState == 4) { //request finished and ready
+                        if (ajaxRequest.status === 200) {
+                            clipIndex += 1;
+                            if (clipIndex < allClips.length) {
+                                uploadNextClip();
+                            } else {
+                                allDone();
+                            }
                         } else {
-                            allDone();
+                            alert('Uploading failed with error code ' + ajaxRequest.status);
                         }
-                    } else {
-                        alert('Uploading failed with error1 code ' + ajaxRequest.status);
                     }
                 }
-            };
-            ajaxRequest.send(blob);
+                ajaxRequest.send(blob);
+            } else {
+                alert('Name not allowed\nEnter new name and press upload again');
+            }
         }
     };
     xhr.send();
