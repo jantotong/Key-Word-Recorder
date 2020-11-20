@@ -10,6 +10,8 @@ Company: UMEC(HK)
 
 Windows 10 user: Please include ffmpeg and ffprobe.
 
-Current Version made with file-output locating and accessible through local network
+Current Version made with file-output locating and accessible through local network, uploads to Google Storage Bucket
 
-Jan 20/10/2020
+Designed to run on Google's IAAS architecture
+
+20/11/2020
