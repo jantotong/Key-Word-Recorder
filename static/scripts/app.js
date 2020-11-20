@@ -386,9 +386,9 @@ function uploadNextClip() {
 
             var ajaxRequest = new XMLHttpRequest();
             if (usrName_itg == true) {
-                if (strUser = " ") {
-                    strUser = "null";
-                }
+                // if (strUser = " ") {
+                //     strUser = "null";
+                // }
                 ajaxRequest.open('POST', "/upload?word=" + word + '&trialN=' + trialN + "&name=" + strUser, true);
                 ajaxRequest.setRequestHeader('Content-Type', 'application/json');
                 ajaxRequest.onreadystatechange = function () {
