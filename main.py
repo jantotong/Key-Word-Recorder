@@ -16,12 +16,12 @@ import uuid
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET'])
+@app.route("/record", methods=['GET'])
 def welcome():
     return render_template("start.html")
 
 
-@app.route("/record")
+@app.route("/")
 def record():
     return render_template("record.html")
 
@@ -62,4 +62,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(ssl_context=('cert.pem', 'key.pem'), host='0.0.0.0', threaded=True, port=80)
+    app.run(host='0.0.0.0', threaded=True, port=80)
