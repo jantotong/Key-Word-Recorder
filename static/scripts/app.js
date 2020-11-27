@@ -21,7 +21,7 @@ var ignoreAutoPlay = false;
 stop.disabled = true;
 upload.disabled = true;
 
-var tries = 1;
+var tries = 3;
 
 // visualiser setup - create web audio api context and canvas
 
@@ -195,19 +195,19 @@ function visualize(stream) {
 var englishWords = [
     'One',
     'Two',
-    // 'Three',
-    // 'Four',
-    // 'Five',
-    // "Hi UMEC",
-    // "UMEC"
+    'Three',
+    'Four',
+    'Five',
+    "Hi UMEC",
+    "UMEC"
 ];
 var chineseWords = [
-    // '一',
-    // '二',
-    // '三',
-    // '四',
-    // '五',
-    // '你好 UMEC',
+    '一',
+    '二',
+    '三',
+    '四',
+    '五',
+    '你好 UMEC',
 ];
 
 var wantedWords = englishWords.concat(chineseWords);

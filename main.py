@@ -15,17 +15,15 @@ import uuid
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def welcome():
+    return render_template("start.html")
+
+
+@app.route("/record")
+def record():
     return render_template("record.html")
-
-
-@app.route("/start")
-def start():
-    response = make_response(redirect('/'))
-    session_id = uuid.uuid4().hex
-    response.set_cookie('session_id', session_id)
-    return response
 
 
 @app.route('/upload', methods=['POST'])
@@ -64,4 +62,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'), threaded=True, port=80)
+    app.run(host='0.0.0.0', threaded=True, port=80)
