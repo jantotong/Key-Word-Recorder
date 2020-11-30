@@ -18,12 +18,12 @@ app = Flask(__name__)
 
 @app.route("/record", methods=['GET'])
 def welcome():
-    return render_template("start.html")
+    return render_template("record.html")
 
 
 @app.route("/")
 def record():
-    return render_template("record.html")
+    return render_template("start.html")
 
 
 @app.route('/upload', methods=['POST'])
@@ -62,4 +62,5 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', threaded=True, port=80)
+    # app.run(host='0.0.0.0', threaded=True, port=80)
+    app.run(threaded=True, port=80)
