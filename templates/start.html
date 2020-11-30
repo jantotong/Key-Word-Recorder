@@ -12,9 +12,9 @@
 <body>
 <div class="center">
     <video controls>
-        <source src="static/styles/KWS_tutorial.mp4" type="video/mp4">
+        <source src={{ url_for('static', filename="styles/KWS_tutorial.mp4")}} type="video/mp4">
     </video>
-            <a href="/record" button type="button" class="btn btn-secondary" style="display:block; margin: 0 auto;  width: 200px;
+        <a href="/record" button type="button" class="btn btn-secondary" style="display:block; margin: 0 auto;  width: 200px;
         height: 100px; font-size : 50px;">Start!
         </button>
     </a>
